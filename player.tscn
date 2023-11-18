@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://58e3bkr7ubgv"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_ifaqg"]
+[ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://ant_idle.tres" id="2_deami"]
+
+[node name="Player" type="Area2D"]
+position = Vector2(2, 0)
+script = ExtResource("1_ifaqg")
+metadata/_edit_group_ = true
+
+[node name="AntAnimation" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_deami")
+animation = &"idle"
