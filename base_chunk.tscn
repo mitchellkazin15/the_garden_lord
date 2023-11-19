@@ -1,0 +1,101 @@
+[gd_scene load_steps=17 format=3 uid="uid://b4mvwt2uhaewx"]
+
+[ext_resource type="Script" path="res://addons/rmsmartshape/shapes/shape_closed.gd" id="1_l0q15"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/vertex_properties.gd" id="2_vqxct"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/shapes/point.gd" id="3_px1os"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/shapes/point_array.gd" id="4_oktb8"]
+[ext_resource type="Texture2D" uid="uid://8l501jrnaqt8" path="res://icon.png" id="5_q26ie"]
+[ext_resource type="Script" path="res://addons/rmsmartshape/materials/shape_material.gd" id="6_avi1m"]
+
+[sub_resource type="Resource" id="Resource_apnlh"]
+script = ExtResource("2_vqxct")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_dwxqu"]
+script = ExtResource("3_px1os")
+position = Vector2(0, 0)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_apnlh")
+
+[sub_resource type="Resource" id="Resource_y8vlw"]
+script = ExtResource("2_vqxct")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_6ck0y"]
+script = ExtResource("3_px1os")
+position = Vector2(1000, 0)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_y8vlw")
+
+[sub_resource type="Resource" id="Resource_a0el7"]
+script = ExtResource("2_vqxct")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_x8a3h"]
+script = ExtResource("3_px1os")
+position = Vector2(1000, 1000)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_a0el7")
+
+[sub_resource type="Resource" id="Resource_iga6b"]
+script = ExtResource("2_vqxct")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_bst82"]
+script = ExtResource("3_px1os")
+position = Vector2(0, 1000)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_iga6b")
+
+[sub_resource type="Resource" id="Resource_00ayl"]
+script = ExtResource("4_oktb8")
+_points = {
+null: null,
+0: SubResource("Resource_dwxqu"),
+1: SubResource("Resource_6ck0y"),
+2: SubResource("Resource_x8a3h"),
+4: SubResource("Resource_bst82")
+}
+_point_order = Array[int]([0, 1, 2, 4, 3])
+_constraints = {
+Array[int]([0, 3]): 15
+}
+_next_key = 5
+_material_overrides = {}
+
+[sub_resource type="Resource" id="Resource_jogei"]
+script = ExtResource("6_avi1m")
+_edge_meta_materials = Array[Resource("res://addons/rmsmartshape/materials/edge_material_metadata.gd")]([])
+fill_textures = Array[Texture2D]([ExtResource("5_q26ie")])
+fill_texture_z_index = -10
+fill_texture_show_behind_parent = false
+fill_mesh_offset = 0.0
+render_offset = 0.0
+
+[node name="BaseChunk" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="SS2D_Shape_Closed" type="Node2D" parent="StaticBody2D"]
+texture_repeat = 2
+script = ExtResource("1_l0q15")
+_points = SubResource("Resource_00ayl")
+shape_material = SubResource("Resource_jogei")
+collision_polygon_node_path = NodePath("../CollisionPolygon2D")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+modulate = Color(1, 1, 1, 0.3)
+polygon = PackedVector2Array(-0.10356, -0.10356, 1000.1, -0.103553, 1000.1, 1000.1, -0.103559, 1000.1)

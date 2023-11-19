@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=40 format=3 uid="uid://b1gpj0xj8n57j"]
+[gd_resource type="SpriteFrames" load_steps=39 format=3 uid="uid://b1gpj0xj8n57j"]
 
 [ext_resource type="Texture2D" uid="uid://bil3jlgua2ocd" path="res://raw_assets/ant_idle_frames/frame0000.png" id="1_5b4vw"]
 [ext_resource type="Texture2D" uid="uid://cqr56jwjyjev0" path="res://raw_assets/ant_idle_frames/frame0001.png" id="2_oq23l"]
@@ -32,7 +32,6 @@
 [ext_resource type="Texture2D" uid="uid://j7c6o6touyli" path="res://raw_assets/ant_idle_frames/frame0029.png" id="30_o23cn"]
 [ext_resource type="Texture2D" uid="uid://b66a4kvqa4o87" path="res://raw_assets/ant_idle_frames/frame0030.png" id="31_4soe5"]
 [ext_resource type="Texture2D" uid="uid://ijs5xt3uc6r2" path="res://raw_assets/ant_idle_frames/frame0031.png" id="32_p04sc"]
-[ext_resource type="Texture2D" uid="uid://doidkevyap0i" path="res://raw_assets/ant_walking_frames/frame0000.png" id="33_fcwj1"]
 [ext_resource type="Texture2D" uid="uid://cl21ge1bcscg8" path="res://raw_assets/ant_walking_frames/frame0001.png" id="34_4itfc"]
 [ext_resource type="Texture2D" uid="uid://c755f0cmd32vc" path="res://raw_assets/ant_walking_frames/frame0002.png" id="35_46qwq"]
 [ext_resource type="Texture2D" uid="uid://yuadwnojl46g" path="res://raw_assets/ant_walking_frames/frame0003.png" id="36_jv5nq"]
@@ -144,9 +143,6 @@ animations = [{
 "speed": 16.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("33_fcwj1")
-}, {
 "duration": 1.0,
 "texture": ExtResource("34_4itfc")
 }, {

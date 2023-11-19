@@ -3,11 +3,25 @@
 [ext_resource type="Script" path="res://player.gd" id="1_ifaqg"]
 [ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://ant_idle.tres" id="2_deami"]
 
-[node name="Player" type="Area2D"]
-position = Vector2(2, 0)
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_ifaqg")
 metadata/_edit_group_ = true
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-26, -43, -35, -34, -115, -96, -200, -109, -243, -99, -248, -39, -217, 8, -176, 41, -108, 44, -64, 23, -45, 5, -37, -2, -29, 14, 0, 160, 25, 35, 60, 40, 85, 20, 107, 32, 172, 51, 201, 66, 245, 49, 246, 16, 231, 4, 228, -41, 204, -61, 180, -65, 155, -65, 136, -65, 92, -26, 22, -50)
 
 [node name="AntAnimation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_deami")
 animation = &"idle"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 210)
+collide_with_areas = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1, 1)
+rotation_smoothing_enabled = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Camera2D")
