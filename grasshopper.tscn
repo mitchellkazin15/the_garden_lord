@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf8fqstgc8mvk"]
+
+[ext_resource type="PackedScene" uid="uid://58e3bkr7ubgv" path="res://player.tscn" id="1_4sfhn"]
+[ext_resource type="Script" path="res://grasshopper.gd" id="2_jg20f"]
+
+[node name="Grasshopper" instance=ExtResource("1_4sfhn")]
+script = ExtResource("2_jg20f")
