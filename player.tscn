@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://58e3bkr7ubgv"]
+[gd_scene load_steps=5 format=3 uid="uid://58e3bkr7ubgv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ifaqg"]
 [ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://ant_idle.tres" id="2_deami"]
 [ext_resource type="Resource" uid="uid://y70wdsjq3iok" path="res://base_stats.tres" id="2_iowsn"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrnv0"]
+radius = 70.1783
+
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(-5, -20)
 scale = Vector2(0.2, 0.2)
+collision_layer = 4
 floor_constant_speed = true
 floor_max_angle = 3.14159
 floor_snap_length = 10.0
@@ -13,9 +18,20 @@ script = ExtResource("1_ifaqg")
 stats = ExtResource("2_iowsn")
 metadata/_edit_group_ = true
 
-[node name="Hitbox" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-26, -43, -35, -34, -115, -96, -200, -109, -243, -99, -248, -39, -217, 8, -176, 41, -108, 44, -64, 23, -45, 5, -37, -2, -29, 14, 0, 160, 25, 35, 60, 40, 85, 20, 107, 32, 172, 51, 201, 66, 245, 49, 246, 16, 231, 4, 228, -41, 204, -61, 180, -65, 155, -65, 136, -65, 92, -26, 22, -50)
-
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_deami")
 animation = &"idle"
+frame = 11
+frame_progress = 0.60512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(25, 100)
+shape = SubResource("CircleShape2D_hrnv0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(1, 1)
+polygon = PackedVector2Array(-26, -43, -35, -34, -115, -96, -200, -109, -243, -99, -248, -39, -217, 8, -176, 41, -108, 44, -64, 23, -45, 5, -37, -2, -29, 14, 0, 30, 25, 35, 60, 40, 85, 20, 107, 32, 172, 51, 201, 66, 245, 49, 246, 16, 231, 4, 228, -41, 204, -61, 180, -65, 155, -65, 136, -65, 92, -26, 22, -50)

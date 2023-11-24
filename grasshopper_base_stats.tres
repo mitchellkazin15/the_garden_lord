@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseStats" load_steps=2 format=3 uid="uid://c5v0qrrin2fv7"]
+
+[ext_resource type="Script" path="res://base_stats.gd" id="1_smvws"]
+
+[resource]
+script = ExtResource("1_smvws")
+speed = 350
+jump_speed = 1200
+gravity = 1500
+air_rotation_deg_per_sec = 360
+sprint_multiplier = 1.5

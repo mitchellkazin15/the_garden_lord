@@ -1,14 +1,26 @@
 class_name PlayerContainer
-extends Node
+extends Node2D
 
-@export var player : Player
-var stats = player.stats
+@onready var player : Player = $Player
+var stats : BaseStats
+var starting_pos
+var player_ready = false
+
+
+
+func get_player_child():
+    var player_child = null
+    for child in get_children():
+        if child is Player:
+            player_child = child
+            break
+    assert(player_child != null, "PLayerContainer must have a starting Player child node")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    player.animation.play("idle")
-
+    stats = player.stats
+    pass
 
 func is_on_surface():
     return player.is_on_floor() or player.is_on_wall() or player.is_on_ceiling()
@@ -68,6 +80,7 @@ func apply_gravity(delta, on_surface, surface_normal):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+    position = player.position
     var on_surface = is_on_surface()
     var normal = get_surface_normal(on_surface)
     if on_surface:
@@ -80,7 +93,8 @@ func _physics_process(delta):
     apply_gravity(delta, on_surface, normal)
     player.move_and_slide()
     set_animation()
+    position = player.position
 
 
 func grasshopper_transform():
-    
+    pass

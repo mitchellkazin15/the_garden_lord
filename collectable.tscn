@@ -1,19 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dttu3l6t3usjf"]
+[gd_scene load_steps=2 format=3 uid="uid://dttu3l6t3usjf"]
 
-[ext_resource type="Script" path="res://Chitin.gd" id="1_62ji5"]
-[ext_resource type="Texture2D" uid="uid://dv5j0ay50r4hv" path="res://raw_assets/chitin.png" id="2_spg31"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_doke0"]
-size = Vector2(64, 64)
+[ext_resource type="Script" path="res://collectable.gd" id="1_d7npl"]
 
 [node name="Collectable" type="Area2D"]
-script = ExtResource("1_62ji5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_doke0")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_spg31")
+script = ExtResource("1_d7npl")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
