@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://t4ujhxar4nrn"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_o5mtk"]
+[ext_resource type="Texture2D" uid="uid://cbeeatdrrg5dy" path="res://raw_assets/praying_mantis.png" id="1_yky4l"]
+[ext_resource type="Texture2D" uid="uid://bmmwqtijnifek" path="res://barHorizontal_red.png" id="3_ow42y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tk7ry"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yky4l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yky4l")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3tja1"]
+radius = 38.0526
+
+[node name="PrayingMantis" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_o5mtk")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_tk7ry")
+animation = &"walking"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 40)
+shape = SubResource("CircleShape2D_3tja1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 39
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-36, -14, -101, 44, -85, 46, -43, 31, 23, -25, 28, -32, 33, -21, 55, -19, 42, 26, 58, 29, 92, -2, 95, -45, 85, -47, 47, -33, 47, -61, 57, -76, 68, -59, 87, -61, 88, -76, 101, -89, 100, -105, 46, -103, 39, -93, 42, -87, 33, -65)
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 14.0
+offset_top = -149.0
+offset_right = 214.0
+offset_bottom = -123.0
+scale = Vector2(0.56354, 0.35725)
+step = -1.0
+value = 100.0
+texture_progress = ExtResource("3_ow42y")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_attack_entered"]

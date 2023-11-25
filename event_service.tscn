@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://tenk3t0gnmi4"]
 
-[ext_resource type="Script" path="res://PlayerTransformService.gd" id="1_3glt2"]
+[ext_resource type="Script" path="res://event_service.gd" id="1_0tdjv"]
 
 [node name="EventService" type="Node2D"]
-script = ExtResource("1_3glt2")
+script = ExtResource("1_0tdjv")
 
 [connection signal="player_transform" from="." to="." method="_on_player_transform"]

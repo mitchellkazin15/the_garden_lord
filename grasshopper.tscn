@@ -28,7 +28,7 @@ radius = 14.0
 
 [node name="Grasshopper" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 9
+collision_mask = 25
 floor_constant_speed = true
 floor_max_angle = 3.14159
 floor_snap_length = 10.0
@@ -52,3 +52,7 @@ polygon = PackedVector2Array(-21, 11, -64, 14, -72, 9, -63, 3, 8, -16, 18, -27, 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_iht05")
+
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack"]

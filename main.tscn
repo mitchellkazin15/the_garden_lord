@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cik3mxlx7gbec"]
+[gd_scene load_steps=39 format=3 uid="uid://cik3mxlx7gbec"]
 
 [ext_resource type="Script" path="res://addons/rmsmartshape/shapes/shape_closed.gd" id="3_2rnj6"]
 [ext_resource type="Script" path="res://addons/rmsmartshape/vertex_properties.gd" id="4_2pylo"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bplod57gn2sfx" path="res://chitin.tscn" id="12_dmlil"]
 [ext_resource type="PackedScene" uid="uid://fjeotrteo4bf" path="res://hud.tscn" id="13_atdb7"]
 [ext_resource type="PackedScene" uid="uid://b4unke8e0ar4x" path="res://grasshopper_item.tscn" id="14_e3ssn"]
+[ext_resource type="PackedScene" uid="uid://t4ujhxar4nrn" path="res://praying_mantis.tscn" id="15_747ay"]
 [ext_resource type="PackedScene" uid="uid://58e3bkr7ubgv" path="res://player.tscn" id="15_ftxbg"]
 
 [sub_resource type="Resource" id="Resource_a36ma"]
@@ -236,3 +237,7 @@ position = Vector2(1713, 2265)
 
 [node name="Chitin5" parent="." instance=ExtResource("12_dmlil")]
 position = Vector2(338, 48)
+
+[node name="PrayingMantis" parent="." instance=ExtResource("15_747ay")]
+position = Vector2(2632, 1383)
+scale = Vector2(-1, 1)

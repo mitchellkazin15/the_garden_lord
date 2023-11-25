@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://csno7nvg3ciwm" path="res://raw_assets/grasshopper.png" id="2_vw4c2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btk6k"]
-radius = 16.0
+radius = 24.0
 
 [node name="GrasshopperItem" instance=ExtResource("1_dh2cp")]
 collision_layer = 8
@@ -13,8 +13,8 @@ collision_mask = 6
 script = ExtResource("2_0ojcn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
-position = Vector2(2.27374e-13, -8)
-scale = Vector2(0.05, 0.05)
+position = Vector2(8, -16)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_vw4c2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
