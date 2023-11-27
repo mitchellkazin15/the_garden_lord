@@ -6,11 +6,10 @@ var health = 100
 
 
 func _on_attack_entered(area):
-    print(area.collision_layer)
     if not area.collision_layer & 0b100000:
         return
+    area.get_parent().attack_collision(Vector2.LEFT)
     health -= 10
     health_bar.value -= 10
     if health <= 0:
         queue_free()
-    

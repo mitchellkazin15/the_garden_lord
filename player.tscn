@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://58e3bkr7ubgv"]
+[gd_scene load_steps=16 format=3 uid="uid://58e3bkr7ubgv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ifaqg"]
 [ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://ant_idle.tres" id="2_deami"]
 [ext_resource type="Resource" uid="uid://y70wdsjq3iok" path="res://base_stats.tres" id="2_iowsn"]
-[ext_resource type="Script" path="res://attack_component.gd" id="4_aojg4"]
+[ext_resource type="Script" path="res://components/attack_component.gd" id="4_a4uko"]
 [ext_resource type="Texture2D" uid="uid://1sdlc4do7xox" path="res://raw_assets/basic_attack/frame0000.png" id="5_e7e8h"]
 [ext_resource type="Texture2D" uid="uid://b1a4d07m2tgg8" path="res://raw_assets/basic_attack/frame0001.png" id="6_d0ryb"]
 [ext_resource type="Texture2D" uid="uid://ch362ld34pnhb" path="res://raw_assets/basic_attack/frame0002.png" id="7_57xyq"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://c8yn0e3pbqbab" path="res://raw_assets/basic_attack/frame0004.png" id="9_epw20"]
 [ext_resource type="Texture2D" uid="uid://raw11oxbarsg" path="res://raw_assets/basic_attack/frame0005.png" id="10_x4an3"]
 [ext_resource type="Texture2D" uid="uid://sivs6fi33nqb" path="res://raw_assets/basic_attack/frame0006.png" id="11_pyie5"]
+[ext_resource type="Script" path="res://components/movement_component.gd" id="12_gbptk"]
+[ext_resource type="Script" path="res://components/move_input_component.gd" id="13_1hkcp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrnv0"]
 radius = 85.1469
@@ -54,6 +56,7 @@ floor_max_angle = 3.14159
 floor_snap_length = 10.0
 script = ExtResource("1_ifaqg")
 stats = ExtResource("2_iowsn")
+metadata/_edit_group_ = true
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_deami")
@@ -70,27 +73,35 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="Area2D"]
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(-26, -43, -35, -34, -115, -96, -200, -109, -243, -99, -248, -39, -217, 8, -176, 41, -108, 44, -64, 23, -45, 5, -37, -2, -29, 14, 0, 30, 25, 35, 60, 40, 85, 20, 107, 32, 172, 51, 201, 66, 245, 49, 246, 16, 231, 4, 228, -41, 204, -61, 180, -65, 155, -65, 136, -65, 92, -26, 22, -50)
 
-[node name="Attack" type="Area2D" parent="."]
+[node name="AttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
 collision_layer = 32
 collision_mask = 16
-script = ExtResource("4_aojg4")
+script = ExtResource("4_a4uko")
+actor = NodePath("..")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponent"]
 position = Vector2(50, 0)
 polygon = PackedVector2Array(185, -165, 330, -135, 370, -15, 350, 105, 265, 175, 265, 25, 225, -110)
 disabled = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Attack"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackComponent"]
 position = Vector2(325, 85)
 sprite_frames = SubResource("SpriteFrames_cja7e")
 frame = 2
 frame_progress = 0.393759
 
-[node name="Timer" type="Timer" parent="Attack"]
+[node name="Timer" type="Timer" parent="AttackComponent"]
 one_shot = true
 
-[connection signal="body_entered" from="Attack" to="Attack" method="_on_enemy_entered"]
-[connection signal="timeout" from="Attack/Timer" to="Attack" method="_on_attack_timeout"]
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("12_gbptk")
+actor = NodePath("..")
+
+[node name="MoveInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("13_1hkcp")
+movement_component = NodePath("../MovementComponent")
+
+[connection signal="body_entered" from="AttackComponent" to="AttackComponent" method="_on_enemy_entered"]
+[connection signal="timeout" from="AttackComponent/Timer" to="AttackComponent" method="_on_attack_timeout"]

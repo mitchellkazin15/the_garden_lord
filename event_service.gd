@@ -1,7 +1,6 @@
 extends Node2D
 
 signal player_transform(old_player, new_player)
-signal attack_collsion(body_1, body_2)    
 
 
 func _on_player_transform(old_player, new_player):
