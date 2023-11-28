@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://58e3bkr7ubgv"]
+[gd_scene load_steps=17 format=3 uid="uid://58e3bkr7ubgv"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ifaqg"]
 [ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://ant_idle.tres" id="2_deami"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://sivs6fi33nqb" path="res://raw_assets/basic_attack/frame0006.png" id="11_pyie5"]
 [ext_resource type="Script" path="res://components/movement_component.gd" id="12_gbptk"]
 [ext_resource type="Script" path="res://components/move_input_component.gd" id="13_1hkcp"]
+[ext_resource type="Script" path="res://components/attack_input_component.gd" id="14_n7gyt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrnv0"]
 radius = 85.1469
@@ -46,8 +47,7 @@ animations = [{
 "speed": 32.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
-position = Vector2(-9.53674e-07, -20)
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
 collision_mask = 17
@@ -102,6 +102,10 @@ actor = NodePath("..")
 [node name="MoveInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
 script = ExtResource("13_1hkcp")
 movement_component = NodePath("../MovementComponent")
+
+[node name="AttackInputComponent" type="Node" parent="." node_paths=PackedStringArray("attack_component")]
+script = ExtResource("14_n7gyt")
+attack_component = NodePath("../AttackComponent")
 
 [connection signal="body_entered" from="AttackComponent" to="AttackComponent" method="_on_enemy_entered"]
 [connection signal="timeout" from="AttackComponent/Timer" to="AttackComponent" method="_on_attack_timeout"]

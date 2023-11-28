@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://t4ujhxar4nrn" path="res://praying_mantis.tscn" id="15_747ay"]
 [ext_resource type="PackedScene" uid="uid://58e3bkr7ubgv" path="res://player.tscn" id="15_ftxbg"]
 
-[sub_resource type="Resource" id="Resource_k42yw"]
+[sub_resource type="Resource" id="Resource_fyl8a"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -27,9 +27,9 @@ script = ExtResource("5_gng42")
 position = Vector2(667.299, 991.06)
 point_in = Vector2(-249.452, 3.5636)
 point_out = Vector2(249.452, -3.5636)
-properties = SubResource("Resource_k42yw")
+properties = SubResource("Resource_fyl8a")
 
-[sub_resource type="Resource" id="Resource_gsywp"]
+[sub_resource type="Resource" id="Resource_wym4k"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -40,9 +40,9 @@ script = ExtResource("5_gng42")
 position = Vector2(667.299, 991.06)
 point_in = Vector2(-249.452, 3.5636)
 point_out = Vector2(249.452, -3.5636)
-properties = SubResource("Resource_gsywp")
+properties = SubResource("Resource_wym4k")
 
-[sub_resource type="Resource" id="Resource_gwq20"]
+[sub_resource type="Resource" id="Resource_5fyao"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -53,9 +53,9 @@ script = ExtResource("5_gng42")
 position = Vector2(1337.13, 587.357)
 point_in = Vector2(-217.428, -188.87)
 point_out = Vector2(333.395, 341.274)
-properties = SubResource("Resource_gwq20")
+properties = SubResource("Resource_5fyao")
 
-[sub_resource type="Resource" id="Resource_36hba"]
+[sub_resource type="Resource" id="Resource_a8611"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -66,9 +66,9 @@ script = ExtResource("5_gng42")
 position = Vector2(2370.58, 1363.61)
 point_in = Vector2(2.99658, -164.814)
 point_out = Vector2(-2.99658, 164.814)
-properties = SubResource("Resource_36hba")
+properties = SubResource("Resource_a8611")
 
-[sub_resource type="Resource" id="Resource_mtxvi"]
+[sub_resource type="Resource" id="Resource_6ad7u"]
 script = ExtResource("4_2pylo")
 texture_idx = -14
 flip = false
@@ -79,9 +79,9 @@ script = ExtResource("5_gng42")
 position = Vector2(1190.99, 2035.63)
 point_in = Vector2(191.783, -65.9254)
 point_out = Vector2(-191.783, 65.9254)
-properties = SubResource("Resource_mtxvi")
+properties = SubResource("Resource_6ad7u")
 
-[sub_resource type="Resource" id="Resource_pe04p"]
+[sub_resource type="Resource" id="Resource_p2d0h"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -92,9 +92,9 @@ script = ExtResource("5_gng42")
 position = Vector2(260.305, 1566.23)
 point_in = Vector2(152.827, 86.9017)
 point_out = Vector2(-152.827, -86.9017)
-properties = SubResource("Resource_pe04p")
+properties = SubResource("Resource_p2d0h")
 
-[sub_resource type="Resource" id="Resource_iacvu"]
+[sub_resource type="Resource" id="Resource_msk4f"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -105,9 +105,9 @@ script = ExtResource("5_gng42")
 position = Vector2(55.1263, 1189.51)
 point_in = Vector2(110.875, 95.8917)
 point_out = Vector2(-110.875, -95.8917)
-properties = SubResource("Resource_iacvu")
+properties = SubResource("Resource_msk4f")
 
-[sub_resource type="Resource" id="Resource_lyaf6"]
+[sub_resource type="Resource" id="Resource_0q4q7"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -118,9 +118,9 @@ script = ExtResource("5_gng42")
 position = Vector2(16.5987, 3.70721)
 point_in = Vector2(-391.995, 96.217)
 point_out = Vector2(391.995, -96.217)
-properties = SubResource("Resource_lyaf6")
+properties = SubResource("Resource_0q4q7")
 
-[sub_resource type="Resource" id="Resource_h3467"]
+[sub_resource type="Resource" id="Resource_v4e4j"]
 script = ExtResource("4_2pylo")
 texture_idx = 0
 flip = false
@@ -131,7 +131,7 @@ script = ExtResource("5_gng42")
 position = Vector2(1278, 1130.49)
 point_in = Vector2(-67.8054, -199.179)
 point_out = Vector2(67.8054, 199.179)
-properties = SubResource("Resource_h3467")
+properties = SubResource("Resource_v4e4j")
 
 [sub_resource type="Resource" id="Resource_exo0s"]
 script = ExtResource("4_3mer2")
@@ -214,11 +214,11 @@ polygon = PackedVector2Array(667.299, 991.059, 678.958, 990.469, 690.551, 989.05
 position = Vector2(1284, 1130)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(653, 11)
+position = Vector2(2120, 1353)
 scale = Vector2(0.2, 0.2)
 
 [node name="Player" parent="." instance=ExtResource("15_ftxbg")]
-position = Vector2(653, 11)
+position = Vector2(2120, 1353)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -239,5 +239,4 @@ position = Vector2(1713, 2265)
 position = Vector2(338, 48)
 
 [node name="PrayingMantis" parent="." instance=ExtResource("15_747ay")]
-position = Vector2(2632, 1383)
-scale = Vector2(-1, 1)
+position = Vector2(2298, 1129)

@@ -9,7 +9,6 @@ var jump_just_pressed = false
 var jump_just_released = false
 
 
-
 func enforce_max_speed():
     if actor.velocity.length() > actor.stats.max_speed:
         actor.velocity = actor.velocity.normalized() * actor.stats.max_speed
@@ -25,7 +24,6 @@ func accelerate(delta, direction_vector, acceleration, final_speed, decel = fals
 
 func air_accelerate(delta, acceleration, max_speed):
     actor.velocity.x += direction * acceleration * delta
-    print(actor.velocity.x)
     if abs(actor.velocity.x) > max_speed:
         actor.velocity.x = direction * max_speed
 

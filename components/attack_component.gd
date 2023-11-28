@@ -6,6 +6,7 @@ extends Area2D
 @onready var animation : AnimatedSprite2D = $AnimatedSprite2D
 @onready var timer : Timer = $Timer
 @export var attack_time : float = 0.2
+var attack_dir = 0
 var attacking = false
 
 func _ready():
@@ -17,7 +18,6 @@ func _ready():
 
 
 func _physics_process(delta):
-    var attack_dir = Input.get_axis("ui_left", "ui_right")
     if attack_dir == 0 or attacking:
         return
     attacking = true

@@ -9,7 +9,7 @@ radius = 24.0
 
 [node name="GrasshopperItem" instance=ExtResource("1_dh2cp")]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 2
 script = ExtResource("2_0ojcn")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
