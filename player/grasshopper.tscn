@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0a7fkbkcu1wj"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_fxv4p"]
+[ext_resource type="Resource" uid="uid://c5v0qrrin2fv7" path="res://items/grasshopper_base_stats.tres" id="2_dp48l"]
+[ext_resource type="Texture2D" uid="uid://csno7nvg3ciwm" path="res://raw_assets/grasshopper.png" id="2_id5ae"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ajhrx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_id5ae")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_id5ae")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iht05"]
+radius = 14.0
+
+[node name="Grasshopper" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 25
+floor_constant_speed = true
+floor_max_angle = 3.14159
+floor_snap_length = 10.0
+script = ExtResource("1_fxv4p")
+stats = ExtResource("2_dp48l")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.68434e-14, -55)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_ajhrx")
+animation = &"idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, -17)
+polygon = PackedVector2Array(-21, 11, -64, 14, -72, 9, -63, 3, 8, -16, 18, -27, 33, -27, 40, -19, 46, 0, 32, 2, 24, -6, 16, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_iht05")
+
+[node name="Attack" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Attack"]

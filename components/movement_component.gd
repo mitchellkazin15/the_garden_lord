@@ -52,6 +52,15 @@ func set_velocity_from_input(delta, on_surface, surface_normal):
         actor.velocity = (actor.stats.jump_speed * surface_normal) + prev_velocity
 
 
+func elastic_collsion(entity_velocity, entity_mass, entity_position):
+    var entity_momentum = entity_velocity * entity_mass
+    var actor_momentum = actor.velocity * actor.stats.mass
+
+
+func apply_impulse(impulse_velocity):
+    actor.velocity += impulse_velocity
+
+
 func apply_gravity(delta, on_surface, surface_normal):
     if !on_surface:
         actor.velocity.y += actor.stats.gravity * delta

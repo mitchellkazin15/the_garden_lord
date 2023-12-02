@@ -1,0 +1,175 @@
+[gd_scene load_steps=23 format=3 uid="uid://t4ujhxar4nrn"]
+
+[ext_resource type="Script" path="res://components/attack_component.gd" id="1_a5fnb"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_vmyaj"]
+[ext_resource type="Texture2D" uid="uid://cbeeatdrrg5dy" path="res://raw_assets/praying_mantis.png" id="1_yky4l"]
+[ext_resource type="Resource" uid="uid://cjxkkmvv5yv5v" path="res://enemies/praying_mantis_stats.tres" id="2_m1adj"]
+[ext_resource type="Texture2D" uid="uid://bmmwqtijnifek" path="res://raw_assets/barHorizontal_red.png" id="3_ow42y"]
+[ext_resource type="Script" path="res://components/movement_component.gd" id="4_em535"]
+[ext_resource type="Script" path="res://state_machine/state_machine.gd" id="5_1rrmp"]
+[ext_resource type="Script" path="res://state_machine/wander_state.gd" id="6_lgm1y"]
+[ext_resource type="Texture2D" uid="uid://1sdlc4do7xox" path="res://raw_assets/basic_attack/frame0000.png" id="7_jyhiq"]
+[ext_resource type="Script" path="res://state_machine/follow_state.gd" id="8_jf7bi"]
+[ext_resource type="Texture2D" uid="uid://b1a4d07m2tgg8" path="res://raw_assets/basic_attack/frame0001.png" id="8_olw5n"]
+[ext_resource type="Texture2D" uid="uid://ch362ld34pnhb" path="res://raw_assets/basic_attack/frame0002.png" id="9_erx07"]
+[ext_resource type="Script" path="res://state_machine/melee_attack_state.gd" id="9_wbewi"]
+[ext_resource type="Texture2D" uid="uid://ceg6wh2pidj7y" path="res://raw_assets/basic_attack/frame0003.png" id="10_3w6xi"]
+[ext_resource type="Texture2D" uid="uid://c8yn0e3pbqbab" path="res://raw_assets/basic_attack/frame0004.png" id="11_bsyu6"]
+[ext_resource type="Texture2D" uid="uid://raw11oxbarsg" path="res://raw_assets/basic_attack/frame0005.png" id="12_hy6kn"]
+[ext_resource type="Texture2D" uid="uid://sivs6fi33nqb" path="res://raw_assets/basic_attack/frame0006.png" id="13_8hk88"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="18_oia7y"]
+[ext_resource type="Texture2D" uid="uid://dnxdpytdysujv" path="res://raw_assets/barHorizontal_gray.png" id="18_oulqi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tk7ry"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yky4l")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yky4l")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3tja1"]
+radius = 38.0526
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fptcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_jyhiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_olw5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_erx07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3w6xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bsyu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_hy6kn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8hk88")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PrayingMantis" type="CharacterBody2D"]
+collision_layer = 4
+floor_constant_speed = true
+floor_max_angle = 3.14159
+floor_snap_length = 10.0
+script = ExtResource("1_vmyaj")
+stats = ExtResource("2_m1adj")
+metadata/_edit_group_ = true
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_tk7ry")
+animation = &"walking"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 40)
+shape = SubResource("CircleShape2D_3tja1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 39
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-36, -14, -101, 44, -85, 46, -43, 31, 23, -25, 28, -32, 33, -21, 55, -19, 42, 26, 58, 29, 92, -2, 95, -45, 85, -47, 47, -33, 47, -61, 57, -76, 68, -59, 87, -61, 88, -76, 101, -89, 100, -105, 46, -103, 39, -93, 42, -87, 33, -65)
+
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("4_em535")
+actor = NodePath("..")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_1rrmp")
+initial_state = NodePath("WanderState")
+
+[node name="WanderState" type="Node" parent="StateMachine"]
+script = ExtResource("6_lgm1y")
+max_follow_distance = 1000.0
+enemy = Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":4,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":true,"floor_block_on_wall":true,"floor_max_angle":3.14159,"floor_snap_length":10.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_vmyaj"),"stats":ExtResource("2_m1adj"),"metadata/_edit_group_":true)
+
+movement_component = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("4_em535"),"actor":Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":4,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":true,"floor_block_on_wall":true,"floor_max_angle":3.14159,"floor_snap_length":10.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_vmyaj"),"stats":ExtResource("2_m1adj"),"metadata/_edit_group_":true)
+)
+
+
+[node name="FollowState" type="Node" parent="StateMachine"]
+script = ExtResource("8_jf7bi")
+max_follow_distance = 1000.0
+max_attack_distance = 150.0
+enemy = Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":4,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":true,"floor_block_on_wall":true,"floor_max_angle":3.14159,"floor_snap_length":10.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_vmyaj"),"stats":ExtResource("2_m1adj"),"metadata/_edit_group_":true)
+
+movement_component = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("4_em535"),"actor":Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":4,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":true,"floor_block_on_wall":true,"floor_max_angle":3.14159,"floor_snap_length":10.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_vmyaj"),"stats":ExtResource("2_m1adj"),"metadata/_edit_group_":true)
+)
+
+
+[node name="MeleeAttackState" type="Node" parent="StateMachine"]
+script = ExtResource("9_wbewi")
+max_attack_distance = 150.0
+enemy = Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":4,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":true,"floor_block_on_wall":true,"floor_max_angle":3.14159,"floor_snap_length":10.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_vmyaj"),"stats":ExtResource("2_m1adj"),"metadata/_edit_group_":true)
+
+attack_component = Object(Area2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":false,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1, -11),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":32,"collision_mask":2,"collision_priority":1.0,"input_pickable":true,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector2(0, 1),"gravity_direction":Vector2(0, 1),"gravity":980.0,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":1.0,"audio_bus_override":false,"audio_bus_name":&"Master","script":ExtResource("1_a5fnb"),"actor":Object(CharacterBody2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"disable_mode":0,"collision_layer":4,"collision_mask":1,"collision_priority":1.0,"input_pickable":false,"motion_mode":0,"up_direction":Vector2(0, -1),"velocity":Vector2(0, 0),"slide_on_ceiling":true,"max_slides":4,"wall_min_slide_angle":0.261799,"floor_stop_on_slope":true,"floor_constant_speed":true,"floor_block_on_wall":true,"floor_max_angle":3.14159,"floor_snap_length":10.0,"platform_on_leave":0,"platform_floor_layers":4294967295,"platform_wall_layers":0,"safe_margin":0.08,"script":ExtResource("1_vmyaj"),"stats":ExtResource("2_m1adj"),"metadata/_edit_group_":true)
+,"attack_time":0.2)
+
+
+[node name="AttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+visible = false
+position = Vector2(1, -11)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_a5fnb")
+actor = NodePath("..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackComponent"]
+position = Vector2(127, -44)
+scale = Vector2(0.5, -0.5)
+sprite_frames = SubResource("SpriteFrames_fptcx")
+frame_progress = 0.55467
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponent"]
+polygon = PackedVector2Array(161, -50, 169, 15, 153, 63, 119, 76, 87, 76, 82, 56, 115, 15, 124, -55, 116, -89, 131, -91)
+
+[node name="AttackActiveTimer" type="Timer" parent="AttackComponent"]
+process_callback = 0
+one_shot = true
+
+[node name="AttackSpeedTimer" type="Timer" parent="AttackComponent"]
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("18_oia7y")
+actor = NodePath("..")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HealthComponent"]
+offset_left = -56.0
+offset_top = -140.0
+offset_right = 144.0
+offset_bottom = -114.0
+scale = Vector2(0.56354, 0.35725)
+step = -1.0
+value = 100.0
+fill_mode = 1
+texture_under = ExtResource("18_oulqi")
+texture_progress = ExtResource("3_ow42y")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_attack_entered"]
+[connection signal="area_entered" from="AttackComponent" to="AttackComponent" method="_on_area_entered"]

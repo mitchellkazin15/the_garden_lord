@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0pljfnx2km67"
-path="res://.godot/imported/ant.png-cbd508eced8ba85b6290d431e1ef988f.ctex"
+uid="uid://dnxdpytdysujv"
+path="res://.godot/imported/barHorizontal_gray.png-f3c19f4c2f8cca9d6c64ec212a520044.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ant.png"
-dest_files=["res://.godot/imported/ant.png-cbd508eced8ba85b6290d431e1ef988f.ctex"]
+source_file="res://raw_assets/barHorizontal_gray.png"
+dest_files=["res://.godot/imported/barHorizontal_gray.png-f3c19f4c2f8cca9d6c64ec212a520044.ctex"]
 
 [params]
 

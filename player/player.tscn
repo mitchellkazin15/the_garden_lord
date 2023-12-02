@@ -1,0 +1,130 @@
+[gd_scene load_steps=20 format=3 uid="uid://58e3bkr7ubgv"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_idxug"]
+[ext_resource type="Resource" uid="uid://y70wdsjq3iok" path="res://player/base_stats.tres" id="2_rwbyc"]
+[ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://player/ant_idle.tres" id="3_jd0om"]
+[ext_resource type="Script" path="res://components/attack_component.gd" id="4_8e7k3"]
+[ext_resource type="Texture2D" uid="uid://1sdlc4do7xox" path="res://raw_assets/basic_attack/frame0000.png" id="5_bovji"]
+[ext_resource type="Texture2D" uid="uid://b1a4d07m2tgg8" path="res://raw_assets/basic_attack/frame0001.png" id="6_n5jfk"]
+[ext_resource type="Texture2D" uid="uid://ch362ld34pnhb" path="res://raw_assets/basic_attack/frame0002.png" id="7_d86tu"]
+[ext_resource type="Texture2D" uid="uid://ceg6wh2pidj7y" path="res://raw_assets/basic_attack/frame0003.png" id="8_nclou"]
+[ext_resource type="Texture2D" uid="uid://c8yn0e3pbqbab" path="res://raw_assets/basic_attack/frame0004.png" id="9_6icb0"]
+[ext_resource type="Texture2D" uid="uid://raw11oxbarsg" path="res://raw_assets/basic_attack/frame0005.png" id="10_w68tf"]
+[ext_resource type="Texture2D" uid="uid://sivs6fi33nqb" path="res://raw_assets/basic_attack/frame0006.png" id="11_y0ban"]
+[ext_resource type="Script" path="res://components/movement_component.gd" id="12_y6bwu"]
+[ext_resource type="Script" path="res://components/move_input_component.gd" id="13_2kth4"]
+[ext_resource type="Script" path="res://components/attack_input_component.gd" id="14_b60yi"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="15_3axie"]
+[ext_resource type="Texture2D" uid="uid://dnxdpytdysujv" path="res://raw_assets/barHorizontal_gray.png" id="16_763oj"]
+[ext_resource type="Texture2D" uid="uid://crnvs2an4nyof" path="res://raw_assets/barHorizontal_green.png" id="17_lq7bo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hrnv0"]
+radius = 85.1469
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cja7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bovji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n5jfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d86tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nclou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6icb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w68tf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_y0ban")
+}],
+"loop": true,
+"name": &"default",
+"speed": 32.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 17
+floor_constant_speed = true
+floor_max_angle = 3.14159
+floor_snap_length = 10.0
+script = ExtResource("1_idxug")
+stats = ExtResource("2_rwbyc")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_jd0om")
+animation = &"idle"
+frame = 11
+frame_progress = 0.60512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.62939e-06, 90)
+shape = SubResource("CircleShape2D_hrnv0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 8
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-26, -43, -35, -34, -115, -96, -200, -109, -243, -99, -248, -39, -217, 8, -176, 41, -108, 44, -64, 23, -45, 5, -37, -2, -29, 14, 0, 30, 25, 35, 60, 40, 85, 20, 107, 32, 172, 51, 201, 66, 245, 49, 246, 16, 231, 4, 228, -41, 204, -61, 180, -65, 155, -65, 136, -65, 92, -26, 22, -50)
+
+[node name="AttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
+visible = false
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("4_8e7k3")
+actor = NodePath("..")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponent"]
+position = Vector2(50, 0)
+polygon = PackedVector2Array(185, -165, 330, -135, 370, -15, 350, 105, 265, 175, 265, 25, 225, -110)
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AttackComponent"]
+position = Vector2(325, 85)
+sprite_frames = SubResource("SpriteFrames_cja7e")
+frame = 2
+frame_progress = 0.393759
+
+[node name="AttackActiveTimer" type="Timer" parent="AttackComponent"]
+process_callback = 0
+one_shot = true
+
+[node name="AttackSpeedTimer" type="Timer" parent="AttackComponent"]
+
+[node name="MovementComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("12_y6bwu")
+actor = NodePath("..")
+
+[node name="MoveInputComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("13_2kth4")
+movement_component = NodePath("../MovementComponent")
+
+[node name="AttackInputComponent" type="Node" parent="." node_paths=PackedStringArray("attack_component")]
+script = ExtResource("14_b60yi")
+attack_component = NodePath("../AttackComponent")
+
+[node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("15_3axie")
+actor = NodePath("..")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HealthComponent"]
+offset_left = -125.0
+offset_top = -220.0
+offset_right = 75.0
+offset_bottom = -180.0
+scale = Vector2(1.24027, 1.14286)
+texture_under = ExtResource("16_763oj")
+texture_progress = ExtResource("17_lq7bo")
+
+[connection signal="body_entered" from="AttackComponent" to="AttackComponent" method="_on_enemy_entered"]
+[connection signal="timeout" from="AttackComponent/AttackActiveTimer" to="AttackComponent" method="_on_attack_timeout"]

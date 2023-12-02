@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EventService="*res://event_service.tscn"
+EventService="*res://services/event_service.tscn"
 
 [display]
 
