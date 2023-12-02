@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dodhvauqfapg0"]
+[gd_scene load_steps=5 format=3 uid="uid://dodhvauqfapg0"]
 
 [ext_resource type="Texture2D" uid="uid://cum8e2gq5lgne" path="res://raw_assets/title.png" id="1_klcmw"]
+[ext_resource type="Script" path="res://screen_components/start_game_button.gd" id="1_tn5o6"]
+[ext_resource type="PackedScene" uid="uid://72ah61rc7uiq" path="res://levels/test_level.tscn" id="2_h3fit"]
+[ext_resource type="Script" path="res://screen_components/quit_game_button.gd" id="3_wdj4j"]
 
 [node name="main_menu" type="Node2D"]
 
@@ -13,6 +16,8 @@ offset_top = 472.0
 offset_right = 560.0
 offset_bottom = 503.0
 text = "Start Game"
+script = ExtResource("1_tn5o6")
+next_scene = ExtResource("2_h3fit")
 
 [node name="Button2" type="Button" parent="CanvasLayer"]
 offset_left = 568.0
@@ -20,6 +25,7 @@ offset_top = 472.0
 offset_right = 665.0
 offset_bottom = 503.0
 text = "Quit Game"
+script = ExtResource("3_wdj4j")
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(538, 275)

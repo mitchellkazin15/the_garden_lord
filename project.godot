@@ -18,6 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 EventService="*res://services/event_service.tscn"
+PauseScreen="*res://screen_components/pause_screen.tscn"
+
+[display]
+
+window/size/mode=3
+window/size/borderless=true
 
 [editor_plugins]
 

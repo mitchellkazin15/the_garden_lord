@@ -5,8 +5,19 @@ signal character_death(character)
 
 
 func _ready():
+    process_mode = Node.PROCESS_MODE_ALWAYS
     character_transform.connect(_on_player_transform)
     character_death.connect(_on_character_death)
+
+
+func _process(delta):
+    if Input.is_action_just_pressed("ui_cancel"):
+        if not get_tree().paused:
+            get_tree().paused = true
+            PauseScreen.show()
+        else:
+            get_tree().paused = false
+            PauseScreen.hide()
 
 
 func _on_player_transform(old_character, new_character):
