@@ -59,6 +59,7 @@ floor_max_angle = 3.14159
 floor_snap_length = 10.0
 script = ExtResource("1_idxug")
 stats = ExtResource("2_rwbyc")
+metadata/_edit_group_ = true
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_jd0om")

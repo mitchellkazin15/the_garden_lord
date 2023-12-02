@@ -11,18 +11,13 @@ config_version=5
 [application]
 
 config/name="The Garden Lord"
-run/main_scene="res://main.tscn"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 EventService="*res://services/event_service.tscn"
-
-[display]
-
-window/size/mode=3
-window/size/borderless=true
 
 [editor_plugins]
 

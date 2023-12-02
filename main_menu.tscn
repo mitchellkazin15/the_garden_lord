@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dodhvauqfapg0"]
+
+[ext_resource type="Texture2D" uid="uid://cum8e2gq5lgne" path="res://raw_assets/title.png" id="1_klcmw"]
+
+[node name="main_menu" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 464.0
+offset_top = 472.0
+offset_right = 560.0
+offset_bottom = 503.0
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 568.0
+offset_top = 472.0
+offset_right = 665.0
+offset_bottom = 503.0
+text = "Quit Game"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(538, 275)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_klcmw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)

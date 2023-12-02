@@ -28,6 +28,7 @@ func _physics_process(delta):
 
 
 func _on_state_transition(old_state : State, new_state_name : String):
+    print("transition")
     if old_state != current_state:
         return
 
