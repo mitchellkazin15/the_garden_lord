@@ -11,7 +11,9 @@ func _ready():
 func _input(event):
     if Input.is_action_just_pressed("ui_accept") and not disabled:
         _on_button_pressed()
-        get_parent().hide()
+        var parent = get_parent()
+        if parent.name == "EndGame":
+            parent.hide_all()
 
 
 func _on_button_pressed():
