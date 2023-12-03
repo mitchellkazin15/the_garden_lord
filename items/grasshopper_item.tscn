@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4unke8e0ar4x"]
+
+[ext_resource type="Script" path="res://items/grasshopper_item.gd" id="2_0ojcn"]
+[ext_resource type="Texture2D" uid="uid://csno7nvg3ciwm" path="res://raw_assets/grasshopper.png" id="2_vw4c2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btk6k"]
+radius = 24.0
+
+[node name="GrasshopperItem"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("2_0ojcn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+position = Vector2(8, -16)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_vw4c2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_btk6k")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

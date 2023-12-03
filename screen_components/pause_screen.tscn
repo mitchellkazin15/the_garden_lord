@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://doli2hekbp0vh"]
+
+[ext_resource type="Script" path="res://screen_components/quit_game_button.gd" id="1_7ys7c"]
+[ext_resource type="Script" path="res://screen_components/pause_screen.gd" id="1_muse0"]
+
+[node name="PauseScreen" type="CanvasLayer"]
+script = ExtResource("1_muse0")
+
+[node name="QuitGameButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Quit Game"
+script = ExtResource("1_7ys7c")
