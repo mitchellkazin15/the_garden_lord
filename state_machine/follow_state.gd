@@ -13,6 +13,9 @@ func enter():
 
 
 func physics_update(delta):
+    if not player:
+        transitioned.emit(self, "WanderState")
+        return
     var distance_vector = player.global_position - enemy.global_position 
     if distance_vector.length() > max_follow_distance:
         transitioned.emit(self, "WanderState")

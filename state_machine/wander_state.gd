@@ -14,10 +14,11 @@ func enter():
 
 
 func physics_update(delta):
-    var distance_vector = player.global_position - enemy.global_position
-    if distance_vector.length() <= max_follow_distance:
-        transitioned.emit(self, "FollowState")
-        return
+    if player:
+        var distance_vector = player.global_position - enemy.global_position
+        if distance_vector.length() <= max_follow_distance:
+            transitioned.emit(self, "FollowState")
+            return
     time_elapsed += delta
     if time_elapsed >= wander_time:
         movement_component.direction = randi_range(-1, 1)

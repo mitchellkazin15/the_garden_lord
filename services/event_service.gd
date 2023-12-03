@@ -30,4 +30,12 @@ func _on_player_transform(old_character, new_character):
 
 
 func _on_character_death(character):
+    EndGame.show_all()
+    if get_tree().get_nodes_in_group("Enemy").size() == 1:
+        EndGame.label.text = "You Win :)"
+        EndGame.show()
+    if character.name == "Player":
+        EndGame.label.text = "You Lose :("
+    character.queue_free()
+    get_tree().paused
     pass
