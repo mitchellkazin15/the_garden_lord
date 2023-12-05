@@ -37,5 +37,4 @@ func _on_character_death(character):
     if character.name == "Player":
         EndGame.label.text = "You Lose :("
     character.queue_free()
-    get_tree().paused
     pass

@@ -14,7 +14,6 @@ func _ready():
 
 
 func hide_all():
-    print("hiding")
     hide()
     restart.disabled = true
     quit.disabled = true
@@ -22,7 +21,6 @@ func hide_all():
 
 
 func show_all():
-    print("showing")
     show()
     restart.disabled = false
     quit.disabled = false

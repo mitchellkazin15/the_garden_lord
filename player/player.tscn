@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://58e3bkr7ubgv"]
+[gd_scene load_steps=24 format=3 uid="uid://58e3bkr7ubgv"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_idxug"]
 [ext_resource type="Resource" uid="uid://y70wdsjq3iok" path="res://player/base_stats.tres" id="2_rwbyc"]
 [ext_resource type="SpriteFrames" uid="uid://b1gpj0xj8n57j" path="res://player/ant_idle.tres" id="3_jd0om"]
+[ext_resource type="Material" uid="uid://wck2e8oe2uug" path="res://shaders/flashing_shader_material.tres" id="3_k3wbs"]
 [ext_resource type="Script" path="res://components/attack_component.gd" id="4_8e7k3"]
 [ext_resource type="Texture2D" uid="uid://1sdlc4do7xox" path="res://raw_assets/basic_attack/frame0000.png" id="5_bovji"]
 [ext_resource type="Texture2D" uid="uid://b1a4d07m2tgg8" path="res://raw_assets/basic_attack/frame0001.png" id="6_n5jfk"]
@@ -50,10 +51,48 @@ animations = [{
 "speed": 32.0
 }]
 
+[sub_resource type="Animation" id="Animation_3thmb"]
+resource_name = "flashing_shader_animation"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:material:shader_parameter/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
+
+[sub_resource type="Animation" id="Animation_gffot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:material:shader_parameter/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hy7nf"]
+_data = {
+"RESET": SubResource("Animation_gffot"),
+"flashing_shader_animation": SubResource("Animation_3thmb")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 scale = Vector2(0.2, 0.2)
 collision_layer = 4
-collision_mask = 17
+collision_mask = 81
 floor_constant_speed = true
 floor_max_angle = 3.14159
 floor_snap_length = 10.0
@@ -62,6 +101,7 @@ stats = ExtResource("2_rwbyc")
 metadata/_edit_group_ = true
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+material = ExtResource("3_k3wbs")
 sprite_frames = ExtResource("3_jd0om")
 animation = &"idle"
 frame = 11
@@ -117,6 +157,8 @@ attack_component = NodePath("../AttackComponent")
 [node name="HealthComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("15_3axie")
 actor = NodePath("..")
+invincible_after_damage = true
+invincibilty_time = 0.8
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="HealthComponent"]
 offset_left = -125.0
@@ -126,6 +168,13 @@ offset_bottom = -180.0
 scale = Vector2(1.24027, 1.14286)
 texture_under = ExtResource("16_763oj")
 texture_progress = ExtResource("17_lq7bo")
+
+[node name="Timer" type="Timer" parent="HealthComponent"]
+
+[node name="InvincibleAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hy7nf")
+}
 
 [connection signal="body_entered" from="AttackComponent" to="AttackComponent" method="_on_enemy_entered"]
 [connection signal="timeout" from="AttackComponent/AttackActiveTimer" to="AttackComponent" method="_on_attack_timeout"]

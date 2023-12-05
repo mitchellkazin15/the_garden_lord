@@ -13,7 +13,7 @@ func enter():
 
 
 func physics_update(delta):
-    if not player:
+    if not is_instance_valid(player):
         transitioned.emit(self, "WanderState")
         return
     var distance_vector = player.global_position - enemy.global_position

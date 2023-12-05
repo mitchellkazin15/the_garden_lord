@@ -28,6 +28,14 @@ func flip_model(flip):
     hitbox.scale.x = flip
 
 
+func turn_on_flashing_shader():
+    $InvincibleAnimationPlayer.play("flashing_shader_animation")
+
+
+func turn_off_flashing_shader():
+     $InvincibleAnimationPlayer.stop()
+
+
 func set_animation():
     if velocity.length() > 0:
         animation.play("walking")
