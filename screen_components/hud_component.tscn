@@ -1,17 +1,20 @@
-[gd_scene format=3 uid="uid://fjeotrteo4bf"]
+[gd_scene load_steps=2 format=3 uid="uid://fjeotrteo4bf"]
 
-[node name="HUD" type="CanvasLayer"]
+[ext_resource type="Script" path="res://screen_components/hud_component.gd" id="1_cm2x7"]
 
-[node name="Label" type="Label" parent="."]
+[node name="HudComponent" type="CanvasLayer"]
+script = ExtResource("1_cm2x7")
+
+[node name="HealthLabel" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 26.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 60
-text = "Hi"
+text = "Health:"
 
-[node name="Label2" type="Label" parent="."]
+[node name="ChitinLabel" type="Label" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -21,4 +24,5 @@ grow_horizontal = 0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
-text = "hi2"
+theme_override_font_sizes/font_size = 60
+text = "Chitin: "

@@ -9,6 +9,5 @@ func _ready():
 
 
 func _on_button_pressed():
-    print("quit")
     get_tree().quit()
     

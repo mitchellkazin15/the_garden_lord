@@ -1,10 +1,18 @@
 class_name Chitin
-extends Collectable
+extends Area2D
+
+@export var value = 1
 
 
 func _on_body_entered(body):
-    queue_free()
+    var inventory_component : InventoryComponent = body.find_child("InventoryComponent")
+    if inventory_component:
+        inventory_component.add_chitin(value)
+        queue_free()
 
 
 func _on_area_entered(area):
-    queue_free()
+    var inventory_component : InventoryComponent = area.get_parent().find_child("InventoryComponent")
+    if inventory_component:
+        inventory_component.add_chitin(value)
+        queue_free()

@@ -1,6 +1,8 @@
 class_name HealthComponent
 extends Node2D
 
+signal health_update()
+
 @export var actor : Player
 @export var invincible_after_damage = false
 @export var invincibilty_time = 0.0
@@ -32,6 +34,7 @@ func apply_damage(damage):
     if invincible_after_damage:
         invincibility_timer.start(invincibilty_time)
         actor.turn_on_flashing_shader()
+    health_update.emit()
 
 
 func apply_healing(health):
@@ -39,6 +42,7 @@ func apply_healing(health):
     if current_health >= base_health:
         current_health = base_health
     health_bar.value = current_health
+    health_update.emit()
 
 
 func _on_invincibility_timeout():
