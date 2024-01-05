@@ -13,8 +13,10 @@ var current_health
 
 
 func _ready():
-    base_health = actor.stats.health
+    await actor.ready
+    base_health = actor.stats.get_modified_stat(Stats.names.HEALTH)
     current_health = base_health
+    health_update.emit()
     health_bar.max_value = base_health
     health_bar.min_value = 0
     health_bar.value = base_health

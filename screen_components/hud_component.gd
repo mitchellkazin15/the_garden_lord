@@ -8,6 +8,7 @@ extends CanvasLayer
 
 
 func _ready():
+    show()
     if inventory_component:
         inventory_component.chitin_update.connect(_on_chitin_update)
         chitin_label.text = "Chitin: " + str(inventory_component.chitin)

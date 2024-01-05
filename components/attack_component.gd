@@ -38,7 +38,7 @@ func _physics_process(delta):
         animation.play("default")
         hurtbox.disabled = false
         attack_active_timer.start(attack_time)
-        attack_speed_timer.start(actor.stats.attack_speed)
+        attack_speed_timer.start(actor.stats.get_modified_stat(Stats.names.ATTACK_SPEED))
         can_attack = false
         actor.call_deferred("flip_model", attack_dir)
         scale.x = attack_dir
@@ -49,8 +49,8 @@ func _on_area_entered(area):
     var entity_health_component : HealthComponent = entity_attacked.find_child("HealthComponent")
     var entity_movement_component : MovementComponent = entity_attacked.find_child("MovementComponent")
     if entity_health_component:
-        entity_health_component.apply_damage(actor.stats.damage)
+        entity_health_component.apply_damage(actor.stats.get_modified_stat(Stats.names.DAMAGE))
     if entity_movement_component:
         var distance_vector = entity_attacked.global_position - actor.global_position
-        entity_movement_component.apply_impulse(distance_vector.normalized() * actor.stats.mass)
-        actor.find_child("MovementComponent").apply_impulse(-distance_vector.normalized() * entity_attacked.stats.mass)
+        entity_movement_component.apply_impulse(distance_vector.normalized() * actor.stats.get_modified_stat(Stats.names.MASS))
+        actor.find_child("MovementComponent").apply_impulse(-distance_vector.normalized() * entity_attacked.stats.get_modified_stat(Stats.names.MASS))

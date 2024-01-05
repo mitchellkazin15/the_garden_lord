@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://58e3bkr7ubgv"]
+[gd_scene load_steps=27 format=3 uid="uid://58e3bkr7ubgv"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_idxug"]
 [ext_resource type="Resource" uid="uid://y70wdsjq3iok" path="res://player/base_stats.tres" id="2_rwbyc"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://crnvs2an4nyof" path="res://raw_assets/barHorizontal_green.png" id="17_lq7bo"]
 [ext_resource type="Script" path="res://components/inventory_component.gd" id="19_s05hd"]
 [ext_resource type="PackedScene" uid="uid://fjeotrteo4bf" path="res://screen_components/hud_component.tscn" id="20_m06qf"]
+[ext_resource type="Script" path="res://components/dash_component.gd" id="21_l53ia"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrnv0"]
 radius = 85.1469
@@ -184,6 +185,12 @@ script = ExtResource("19_s05hd")
 [node name="HudComponent" parent="." node_paths=PackedStringArray("inventory_component", "health_component") instance=ExtResource("20_m06qf")]
 inventory_component = NodePath("../InventoryComponent")
 health_component = NodePath("../HealthComponent")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="DashComponent" type="Node2D" parent="." node_paths=PackedStringArray("movement_component")]
+script = ExtResource("21_l53ia")
+movement_component = NodePath("../MovementComponent")
 
 [connection signal="body_entered" from="AttackComponent" to="AttackComponent" method="_on_enemy_entered"]
 [connection signal="timeout" from="AttackComponent/AttackActiveTimer" to="AttackComponent" method="_on_attack_timeout"]

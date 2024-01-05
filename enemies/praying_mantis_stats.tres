@@ -1,20 +1,20 @@
-[gd_resource type="Resource" script_class="BaseStats" load_steps=2 format=3 uid="uid://cjxkkmvv5yv5v"]
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://cjxkkmvv5yv5v"]
 
 [ext_resource type="Script" path="res://player/base_stats.gd" id="1_kqktg"]
 
 [resource]
 script = ExtResource("1_kqktg")
-speed = 200
-jump_speed = 750
-gravity = 1500
-air_rotation_deg_per_sec = 360
-air_acceleration = 800
-max_air_speed = 1000
-max_speed = 3000
-sprint_multiplier = 1.5
-acceleration = 600
-friction = -1200
-damage = 25
-mass = 1000
-health = 100
-attack_speed = 2
+_base_speed = 350
+_base_jump_speed = 750
+_base_gravity = 1500
+_base_air_rotation_deg_per_sec = 360
+_base_air_acceleration = 800
+_base_max_air_speed = 1000
+_base_max_speed = 3000
+_base_sprint_multiplier = 1.5
+_base_acceleration = 400
+_base_friction = -800
+_base_damage = 20
+_base_mass = 1000
+_base_health = 100
+_base_attack_speed = 2

@@ -6,4 +6,4 @@
 resource_local_to_scene = true
 shader = ExtResource("1_u7xt3")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_modifier = 0.5

@@ -2,12 +2,14 @@ extends Node2D
 
 signal character_transform(old_character, new_character)
 signal character_death(character)
+signal next_level()
 
 
 func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
     character_transform.connect(_on_player_transform)
     character_death.connect(_on_character_death)
+    next_level.connect(_on_next_level)
 
 
 func _process(delta):
@@ -38,3 +40,16 @@ func _on_character_death(character):
         EndGame.label.text = "You Lose :("
     character.queue_free()
     pass
+
+
+func _on_next_level():
+    var level = RandomLevelGen.random_level()
+    var player = preload("res://player/player.tscn").instantiate()
+    player.position.x = 0
+    player.position.y = -100
+    level.add_child(player)
+    player.owner = level
+    var scene = PackedScene.new()
+    scene.pack(level)
+    ResourceSaver.save(scene, "res://test_packed_scene.tscn")
+    get_tree().change_scene_to_packed(scene)

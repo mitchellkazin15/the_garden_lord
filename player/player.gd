@@ -1,13 +1,17 @@
 class_name Player
 extends CharacterBody2D
 
-@export var stats : BaseStats
+@export var stats : Stats
 @onready var animation = $Animation
 @onready var hitbox = $Area2D/Hitbox
 var prev_air_rotate_dir = 0
 
 
 func _ready():
+    if animation.material and animation.material is ShaderMaterial:
+        var shader : ShaderMaterial = animation.material
+        shader.set_shader_parameter("flash_modifier", 0)
+    stats.init_stats()
     pass
 
 
@@ -24,8 +28,13 @@ func get_surface_normal(on_surface):
 func flip_model(flip):
     if flip == 0:
         return
+    flip = sign(flip)
     animation.flip_h = flip < 0
     hitbox.scale.x = flip
+
+
+func get_model_dir():
+    return sign(hitbox.scale.x)
 
 
 func turn_on_flashing_shader():
