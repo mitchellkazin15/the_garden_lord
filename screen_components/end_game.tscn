@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://7gjdgxnl56sn"]
+[gd_scene load_steps=5 format=3 uid="uid://7gjdgxnl56sn"]
 
 [ext_resource type="Script" path="res://screen_components/end_game.gd" id="1_0axlh"]
 [ext_resource type="Script" path="res://screen_components/main_menu_button.gd" id="1_lycws"]
 [ext_resource type="Script" path="res://screen_components/quit_game_button.gd" id="2_36c0l"]
 [ext_resource type="Script" path="res://screen_components/start_game_button.gd" id="3_esehm"]
-[ext_resource type="PackedScene" uid="uid://72ah61rc7uiq" path="res://levels/test_level.tscn" id="4_kso8a"]
 
 [node name="EndGame" type="CanvasLayer"]
 script = ExtResource("1_0axlh")
@@ -30,13 +29,12 @@ text = "Quit"
 script = ExtResource("2_36c0l")
 
 [node name="StartGameButton" type="Button" parent="."]
-offset_left = 648.0
+offset_left = 624.0
 offset_top = 512.0
-offset_right = 713.0
+offset_right = 714.0
 offset_bottom = 543.0
-text = "Restart"
+text = "Next Level"
 script = ExtResource("3_esehm")
-next_scene = ExtResource("4_kso8a")
 
 [node name="MainMenuButton" type="Button" parent="."]
 offset_left = 720.0

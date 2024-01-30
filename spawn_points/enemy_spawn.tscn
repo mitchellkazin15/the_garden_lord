@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://br18g3wpd682b"]
+
+[ext_resource type="Script" path="res://spawn_points/enemy_spawn.gd" id="1_q0ngq"]
+
+[node name="enemy_spawn" type="Node2D"]
+script = ExtResource("1_q0ngq")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+gizmo_extents = 100.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.521569, 0.266667, 1, 1)
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)

@@ -11,9 +11,7 @@ var jump_just_released = false
 
 
 func get_facing_direction():
-    print(actor.rotation)
-    var angle = actor.rotation 
-    print(angle)
+    var angle = actor.rotation
     return Vector2.from_angle(angle) * actor.get_model_dir()
 
 

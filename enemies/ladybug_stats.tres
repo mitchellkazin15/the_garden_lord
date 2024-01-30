@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Stats" load_steps=2 format=3 uid="uid://dc3lfvd4pxajl"]
+
+[ext_resource type="Script" path="res://player/base_stats.gd" id="1_vuui0"]
+
+[resource]
+script = ExtResource("1_vuui0")
+_base_speed = 200
+_base_jump_speed = 750
+_base_gravity = 1500
+_base_air_rotation_deg_per_sec = 360
+_base_air_acceleration = 800
+_base_max_air_speed = 1000
+_base_max_speed = 3000
+_base_sprint_multiplier = 1.5
+_base_acceleration = 100
+_base_friction = -800
+_base_damage = 10
+_base_mass = 10
+_base_health = 10
+_base_attack_speed = 1

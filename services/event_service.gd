@@ -32,18 +32,20 @@ func _on_player_transform(old_character, new_character):
 
 
 func _on_character_death(character):
-    EndGame.show_all()
     if get_tree().get_nodes_in_group("Enemy").size() == 1:
-        EndGame.label.text = "You Win :)"
+        EndGame.label.text = "Level Complete :)"
         EndGame.show()
+        EndGame.show_all()
     if character.name == "Player":
         EndGame.label.text = "You Lose :("
+        EndGame.restart.text = "Restart"
+        EndGame.show_all()
     character.queue_free()
     pass
 
 
 func _on_next_level():
-    var level = RandomLevelGen.random_level()
+    var level = RandomLevelGen.random_level(6, 10)
     var player = preload("res://player/player.tscn").instantiate()
     player.position.x = 0
     player.position.y = -100

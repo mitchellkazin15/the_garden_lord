@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://t4ujhxar4nrn"]
+[gd_scene load_steps=24 format=3 uid="uid://t4ujhxar4nrn"]
 
 [ext_resource type="Script" path="res://components/attack_component.gd" id="1_a5fnb"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_vmyaj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://state_machine/follow_state.gd" id="8_jf7bi"]
 [ext_resource type="Texture2D" uid="uid://b1a4d07m2tgg8" path="res://raw_assets/basic_attack/frame0001.png" id="8_olw5n"]
 [ext_resource type="Texture2D" uid="uid://ch362ld34pnhb" path="res://raw_assets/basic_attack/frame0002.png" id="9_erx07"]
+[ext_resource type="Script" path="res://state_machine/idle_state.gd" id="9_tkm0l"]
 [ext_resource type="Script" path="res://state_machine/melee_attack_state.gd" id="9_wbewi"]
 [ext_resource type="Texture2D" uid="uid://ceg6wh2pidj7y" path="res://raw_assets/basic_attack/frame0003.png" id="10_3w6xi"]
 [ext_resource type="Texture2D" uid="uid://c8yn0e3pbqbab" path="res://raw_assets/basic_attack/frame0004.png" id="11_bsyu6"]
@@ -103,26 +104,37 @@ actor = NodePath("..")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_1rrmp")
-initial_state = NodePath("WanderState")
+initial_state = NodePath("IdleState")
 
-[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "movement_component")]
+[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "movement_component", "close_state", "far_state")]
 script = ExtResource("6_lgm1y")
 enemy = NodePath("../..")
 movement_component = NodePath("../../MovementComponent")
-max_follow_distance = 1000.0
+close_state = NodePath("../FollowState")
+far_state = NodePath("../IdleState")
+max_wander_distance = 1500.0
+min_wander_distance = 1000.0
 
-[node name="FollowState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "movement_component")]
+[node name="FollowState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "movement_component", "close_state", "far_state")]
 script = ExtResource("8_jf7bi")
 enemy = NodePath("../..")
 movement_component = NodePath("../../MovementComponent")
+close_state = NodePath("../MeleeAttackState")
+far_state = NodePath("../WanderState")
 max_follow_distance = 1000.0
-max_attack_distance = 150.0
+min_follow_distance = 150.0
 
 [node name="MeleeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "attack_component")]
 script = ExtResource("9_wbewi")
 enemy = NodePath("../..")
 attack_component = NodePath("../../AttackComponent")
 max_attack_distance = 150.0
+
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "next_state")]
+script = ExtResource("9_tkm0l")
+enemy = NodePath("../..")
+next_state = NodePath("../WanderState")
+max_idle_distance = 1500.0
 
 [node name="AttackComponent" type="Area2D" parent="." node_paths=PackedStringArray("actor")]
 visible = false
